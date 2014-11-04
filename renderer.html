@@ -118,6 +118,9 @@
 
       <h3>Results</h3>
       <div class="well">
+        The renderer exceeded the target FPS of 30 FPS for all 5 models tested. The largest model provided by the Zamani team at the time of writeing the report was the <em>Shama Fort</em> model with almost 90 million polygons. The renderer achieved a minimum of 46.8 FPS on this model, with an average FPS of 58.4. The decoupling of the loading and rendering tasks proved to be an effective method at reducing rendering pipeline stalls - at worst, gaps are briefly visible in the rendered image, but no stuttering occurs. We were provided with a 6 GB model to test with after the final report was due, and again, the renderer exceeded the target minimum frame rate. It is uncertain how the renderer will perform with even larger models, but for now it outperforms the MeshLab tool used by the Zamani team by a considerable margin, thereby proving that a hierarchical level-of-detail scheme is a viable method for rendering large meshes.
+        <br><br>
+        Final output of the renderer on the 5 tested models can be viewed on the <a href="index.html" title="Overview">Overview page</a>.
       </div>
 
     </div>
