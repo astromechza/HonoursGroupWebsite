@@ -46,10 +46,6 @@ table a:hover, p a:hover {
     text-decoration: none;
 }
 
-p span {
-    font-style: italic;
-}
-
 .img-well-white {
     padding: 9px;
     border-radius: 3px;
