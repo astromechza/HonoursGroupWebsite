@@ -45,9 +45,82 @@
     </nav>
 
     <div class="container">
-      <h1>Hello, world!</h1>
-    </div>
 
+      <h1>The Renderer</h1>
+
+      <h3>Background</h3>
+
+      <div class="well">
+        The Zamani project is an initiative started in 2004 for the Department of Geomatics at the University of Cape Town. It aims to digitally preserve architectural heritage sites around Africa 
+        for the purposes of preservation, restoration and education. This aim is achieved using tools such as laser scanners which generate massive 3D point clouds as samples of a building's surface.
+        These point clouds are extrapolated into meshes which approximate the surface of a building. The result is a large 3D model of the site.
+      </div>
+
+      <h3>Motivation and Aims</h3>
+
+      <div class="well">
+        <p>
+          In order for the Zamani team to achieve their goal, there is the requirement that they
+          are able to actually view the models they generate from their laser scans. The current tool used by members of the Zamani project, MeshLab, cannot render the models they produce 
+          at interactive frame rates (we define this target as 30 FPS). This is due to the sheer size of the models, ranging between 90 MB to 6 GB.<br><br>
+
+          I developed a simple and un-optimized viewing client (renderer) as a benchmark as a proof of concept for a tool that can provide better frame rates. This test implementation
+          consisted of inserting all the geometry information of a 207MB model into a single Vertex Buffer Object (VBO). On a laptop with a mid-range graphics card, MeshLab achieved 1.7 FPS,
+          while the custom implementation achived 48.5 FPS. This indicated that there was potential to design a better viewing client - manipulation of models is beyond the scope of this project.
+          <br><br>
+
+          The goal of the project, and specifically, the renderer, was to be able to render relatively arbitrarily-sized models at a minimum of 30 FPS. Common bottlenecks in such applications are
+          available memory and disk read speed: models are too large to fit into memory and disk read speed is not fast enough to read model data on-demand. Thus, the renderer's main challenges and goals are to
+          manage resource usage (system and GPU memory) and to reduce rendering pipeline stalls (causing stuttering and input lag) when reading from disk.
+        </p>
+      </div>
+
+      <h3>Implementation</h3>
+
+      <div class="well">
+        <p>
+          Our solution is based on a hierarchical level-of-detail (HLOD) scheme. The original model is split into iteratively smaller chunks and simplified. The root node of the hierarchy is the most simplified version, while the leaf nodes contain 
+          original, unsimplified geometry. Generating this hierarchy and simplifying the geometry is the focus of my group members' reports. My report focuses on the viewing client, which uses the generated hierarchy as input. Figure 1 shows the various components of the project.
+        </p>
+
+        <div class="image-with-caption">
+          <img src="images/structural-overview.png" alt="Structural overview">
+          <p><em>Figure 1 - Structural overview of the project. The preprocessing step consists of splitting the original model, simplifying the chunks and generating the hiearchy file.</em></p>
+        </div>
+
+        <br>
+        <p>
+          The renderer employs multiple techniques to efficiently utilize available system resources:
+
+          <br><br>
+          <strong>Processing over loading</strong><br>
+          The renderer attempts to shift the workload from the disk to the CPU. That is, it prefers to calculate the required data on-the-fly rather than have to read more data from disk. This is the case for vertex normals: normal data is not stored with the vertex position and colour information, but rather they are calculated from the vertex information using linear algebra. The advantage of this is the processed file size is smaller, can be loaded from disk faster and the calculation of normals can be performed in a separate thread.
+
+          <br><br>
+          <strong>View-dependant refinement</strong><br>
+          The primary reason for making use of an HLOD scheme is its ability to selectively refine and enhance detail of certain parts of the model only. Starting from the root node in the hierarchy, parts of the model that are closer to the viewer's camera are expanded by rendering the geometry contained in the child nodes, thus increasing the amount of detail. As the viewer's camera moves away from parts of the model, the corresponding nodes in the hierarchy are collapsed and their parent node is rendered, thereby reducing the detail rendered (and thus, the number of polygons pushed to the GPU).
+
+          <div class="image-with-caption">
+            <img src="images/node-expansion.png" alt="Node expansion process">
+            <p><em>Figure 2 - A node is expanded by projecting its bounding box onto the screen and determining its screen area metric</em></p>
+          </div>
+          <br>
+          Determining when to expand or collapse a node is done using a double threshold screen area metric. The bounding box of each node is projected onto the screen in order to determine its screen area. If the bounding box is above a certain threshold, the node is deemed close to the camera and is expanded - and vice versa. Figure 2 illustrates the process of a node being expanded.
+
+          <br><br>
+          <strong>Data loading and caching</strong><br>
+          Reducing the amount of time the renderer spends loading data from the disk is crucial to improving performance. Data loading is performed in a parallel thread to ensure the renderer does not stutter or stall whilst waiting for IO operations to complete. To improve read speed, the geometric data for each node is located in a single, continuous block - thereby requiring only a single read call and exploiting the disk's sequential read speed.
+          <br><br>
+          Data that has been loaded and processed is cached in memory based on the following critera: it has been required for rendering in the last 8 seconds or it is the parent or child node of a node that was rendered in the previous frame. These conditions balance the amount of memory used by the renderer and the amount of loading the disk must perform. The parent-child condition is a form of pre-loading and reduces the number of gaps that appear in the rendered image if the required node data has not yet been loaded.
+
+        </p>
+      </div>  
+
+      <h3>Results</h3>
+      <div class="well">
+      </div>
+
+    </div>
 
     <!-- Add JS scripts and imports below this line -->
     <script src="javascripts/vendor/jquery-1.11.1.min.js"></script>

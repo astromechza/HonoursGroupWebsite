@@ -9,7 +9,7 @@
 .carousel-inner {
     background: #82b8f2;
     border-radius: 5px;
-    border: 1px solid #fff;
+    border: 2px solid #fff;
 }
 
 .carousel-control.left {
@@ -26,3 +26,13 @@
     margin-right: auto;
 }
 
+.image-with-caption {
+	margin: 0 auto;
+	text-align: center;
+	border: 1px solid rgba(56, 57, 60, 1);
+	border-radius: 5px;
+	padding: 10px;
+	padding-bottom: 0px;
+	font-size: 10pt;
+	background-color: rgba(17, 18, 21, 1);
+}
