@@ -110,3 +110,82 @@ body {
   bottom: 0;
   width: 100%;
 }
+
+.paragraph-well {
+    min-height: 20px;
+    margin-bottom: 20px;
+    background-color: #1C1E22;
+    border: 1px solid #0C0D0E;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.05) inset;
+    padding: 9px;
+    border-radius: 3px;
+}
+
+.paragraph-well p:last-child {
+    margin-bottom: 0px;
+}
+
+.image-panel-wrap {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.image-panel {
+    border-radius: 3px;
+    border: 1px solid #0C0D0E;
+    background: #fff;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%;
+    background-clip: padding-box;
+}
+
+.image-panel img {
+    padding: 8px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+.image-panel img.multi-image-200 {
+    width: auto;
+    display:inline;
+    height: 200px;
+}
+
+.image-panel .image-panel-caption {
+    background: #1C1E22;
+    color: #C8C8C8;
+    padding: 5px;
+    font-size: 12px;
+    text-align:left;
+}
+
+span.explain {
+    cursor: help;
+    border-bottom: 1px dotted #7A8288;
+}
+
+.image-panel-caption a, .paragraph-well a {
+    color: #5BC0DE;
+}
+
+.image-panel-caption a:hover, .paragraph-well a:hover {
+    color: #3f99b3;
+    text-decoration: none;
+}
+
+.centered-panel-wrap {
+    width: 100%;
+    text-align: center;
+}
+
+.centered-panel-wrap .panel {
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}

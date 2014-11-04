@@ -53,7 +53,7 @@
           <img class="img-well-white" src="images/simplifier/overview.png" alt="Simplifier overview">
   
           <h3>Introduction</h3>
-          <div class="well">
+          <div class="paragraph-well">
             <p>
               This section of the project was centered on the mesh simplification component of the preprocessor. 
             </p>
@@ -68,92 +68,108 @@
             </div>
 
           <h3>Design and Implementation</h3>
-          <div class="well">
+          <div class="paragraph-well">
             <p>
               The design and implementation of the simplifier tool (known as SimplFy) were heavily guided by experimenting with the Tridecimator simplifier found in VCG (a Quadric Error Edge Collapse implementation). Following a visual inspection of meshes simplified with this algorithm, and due to its poor documentation. We attempted to gain an understanding of the VCG implementation by refactoring its code into a new design.
             </p>
+          </div>
 
-            <div class="image-with-caption">
-              <img class="img-well-white" src="images/simplifier/design.png" alt="Simplifier design">
-              <p><em>Figure 1 - Simplifier design. Green are elements are based on VCGlib implementation, blue elements are customized/new</em></p>
+          <div class="image-panel-wrap">
+            <div class="image-panel">
+              <img src="images/simplifier/design.png" alt="Simplifier design">
+              <div class="image-panel-caption">
+                <strong>Figure 1:</strong> Simplifier design. Green are elements are based on VCGlib implementation, blue elements are customized/new.
+              </div>
             </div>
+          </div>
 
-            <p>
-              The pre-processor spatially divides the mesh into chunks. Each of these chunks is then simplified before being re-stitched together.
-            </p>
+          <div class="paragraph-well">
+            The pre-processor spatially divides the mesh into chunks. Each of these chunks is then simplified before being re-stitched together.
+          </div>
 
-            <div class="image-with-caption">
-              <img  class="img-well-white" src="images/simplifier/seams.png" alt="Seams" style="width:400px;height:230">
-              <p><em>Figure 2 - Seams are formed when the edges of mesh chunks (sections) are deformed before being stitched back together</em></p>
+          <div class="image-panel-wrap">
+            <div class="image-panel">
+              <img src="images/simplifier/seams.png" alt="Seams" style="max-width:400px">
+              <div class="image-panel-caption">
+                <strong>Figure 2:</strong> Seams are formed when the edges of mesh chunks (sections) are deformed before being stitched back together.
+              </div>
             </div>
+          </div>
 
-            <p>
-              The creation of seams can be avoided by enabling Tridecimators boundary preservation, however, this includes the boundaries surrounding any holes in a mesh. Meshes cannot be simplified beyond this boundary face count without detail compromising artefacts. 
-            </p>
+          <div class="paragraph-well">
+            The creation of seams can be avoided by enabling Tridecimators boundary preservation, however, this includes the boundaries surrounding any holes in a mesh. Meshes cannot be simplified beyond this boundary face count without detail compromising artefacts. 
+          </div>
 
-
-            <div class="image-with-caption">
-              <img class="image-multiple-white" src="images/simplifier/gede borders.png" alt="Gede with boundary triangles selected">
-              <img class="image-multiple-white" src="images/simplifier/gedeheavysimpborder.png" alt="Gede  simplified heavily with boundary preservation enabled">
-              <p><em>Figure 3 - Gede, left with all border triangles (~125 000) highlighted in red, right after simplifying Gede to ~125 000 directly with tridecimator, with border preservation enabled</em></p>
-            </div><br>
-
-
-            <p>
-              The simplifier was adapted by enabling support for coloured vertices, post simplification mesh cleaning and a by redefining how border triangles are identified.  The pre-processor specifies a bounding box that defines the mesh volume of the mesh chunk. All triangles that intersect or exist outside of the bounding box are defined as boundary triangles. The rectangular edges of each chunk are then preserved until they are stitched together.
-            </p>
-
-            <div class="image-with-caption">
-              <img class="image-multiple-white" src="images/simplifier/initial-WithoutBordepres.png" alt="Gede simplified without boundary preservation" >
-              <img class="image-multiple-white" src="images/simplifier/initialWithCustomBoder.png" alt="Gede simplified with custom boundary preservation">
-              <p><em>Figure 4 - Gede simplified to 30 000 faces with an early version of the mesh pre-processor. Left is without boundary preservation, right is with custom boundary preservation</em></p>
+          <div class="image-panel-wrap">
+            <div class="image-panel">
+              <img class="multi-image-200" src="images/simplifier/gede borders.png" alt="Gede with boundary triangles selected">
+              <img class="multi-image-200" src="images/simplifier/gedeheavysimpborder.png" alt="Gede simplified heavily with boundary preservation enabled">
+              <div class="image-panel-caption">
+                <strong>Figure 3:</strong> Gede, left with all border triangles (~125 000) highlighted in red, right after simplifying Gede to ~125 000 directly with tridecimator, with border preservation enabled.
+              </div>
             </div>
+          </div>
 
+          <div class="paragraph-well">
+            The simplifier was adapted by enabling support for coloured vertices, post simplification mesh cleaning and a by redefining how border triangles are identified.  The pre-processor specifies a bounding box that defines the mesh volume of the mesh chunk. All triangles that intersect or exist outside of the bounding box are defined as boundary triangles. The rectangular edges of each chunk are then preserved until they are stitched together.
+          </div>
+
+          <div class="image-panel-wrap">
+            <div class="image-panel">
+              <img class="multi-image-200" src="images/simplifier/initial-WithoutBordepres.png" alt="Gede simplified without boundary preservation">
+              <img class="multi-image-200" src="images/simplifier/initialWithCustomBoder.png" alt="Gede simplified with custom boundary preservation">
+              <div class="image-panel-caption">
+                <strong>Figure 4:</strong> Gede simplified to 30 000 faces with an early version of the mesh pre-processor. Left is without boundary preservation, right is with custom boundary preservation.
+              </div>
             </div>
+          </div>
+
           <h3>Results</h3>
-          <div class="well">
-          <p>
+          <div class="paragraph-well">
           Meshes were pre-processed with SimplFy and Tridecimator. These processed meshes were then visually compared to evaluate the changes made in SimplFy. The final version of the pre-processor creates a level of detail hiararchy with the root node containing the full mesh simplified down to 400 000 faces.
-          </p>
+          </div>
 
-          <div class="image-with-caption">
-              <img class="image-multiple-white" src="images/simplifier/jagocoloured/simWOboundary.png" alt="Gede simplified without boundary preservation" >
-              <img class="image-multiple-white" src="images/simplifier/jagocoloured/simWcustomboundary.png" alt="Gede simplified with custom boundary preservation"><br>
-              <img class="image-multiple-white" src="images/simplifier/jagocoloured/triWOboundary.png" alt="Gede simplified without boundary preservation" >
-              <img class="image-multiple-white" src="images/simplifier/jagocoloured/triWboundary.png" alt="Gede simplified with custom boundary preservation">
-
-
-              <p><em>Figure 5 - Jago with per-vertex colour (30Million faces) Simplified using Preprocessor using: top left -SimplFy w/o boundary preservation, top right -SimplFy w/ custom boundary preservation, bottom left -Tridecimator w/o boundary preservation, bottom right -Tridecimator w/ boundary preservation </em></p>
+          <div class="image-panel-wrap">
+            <div class="image-panel">
+              <img class="multi-image-200" src="images/simplifier/jagocoloured/simWOboundary.png" alt="Gede simplified without boundary preservation" >
+              <img class="multi-image-200" src="images/simplifier/jagocoloured/simWcustomboundary.png" alt="Gede simplified with custom boundary preservation"><br>
+              <img class="multi-image-200" src="images/simplifier/jagocoloured/triWOboundary.png" alt="Gede simplified without boundary preservation" >
+              <img class="multi-image-200" src="images/simplifier/jagocoloured/triWboundary.png" alt="Gede simplified with custom boundary preservation">
+              <div class="image-panel-caption">
+                <strong>Figure 5:</strong> Jago with per-vertex colour (30Million faces) Simplified using Preprocessor using: top left -SimplFy w/o boundary preservation, top right -SimplFy w/ custom boundary preservation, bottom left -Tridecimator w/o boundary preservation, bottom right -Tridecimator w/ boundary preservation.
+              </div>
             </div>
+          </div>
 
-            <div class="image-with-caption">
-              <img class="image-multiple-white" src="images/simplifier/Nossa/simWOboundary.png" alt="Gede simplified without boundary preservation" >
-              <img class="image-multiple-white" src="images/simplifier/Nossa/simWcustomboundary.png" alt="Gede simplified with custom boundary preservation"><br>
-              <img class="image-multiple-white" src="images/simplifier/Nossa/triWOboundary.png" alt="Gede simplified without boundary preservation" >
-              <img class="image-multiple-white" src="images/simplifier/Nossa/triWboundary.png" alt="Gede simplified with custom boundary preservation">
+          <div class="image-panel-wrap">
+            <div class="image-panel">
+              <img class="multi-image-200" src="images/simplifier/Nossa/simWOboundary.png" alt="Nossa simplified without boundary preservation" >
+              <img class="multi-image-200" src="images/simplifier/Nossa/simWcustomboundary.png" alt="Nossa simplified with custom boundary preservation"><br>
+              <img class="multi-image-200" src="images/simplifier/Nossa/triWOboundary.png" alt="Nossa simplified without boundary preservation" >
+              <img class="multi-image-200" src="images/simplifier/Nossa/triWboundary.png" alt="Nossa simplified with custom boundary preservation">
+              <div class="image-panel-caption">
+                <strong>Figure 6:</strong> Chapel of Nossa with per-vertex colour (9.5Million faces) Simplified using Preprocessor using: top left -SimplFy w/o boundary preservation, top right -SimplFy w/ custom boundary preservation, bottom left -Tridecimator w/o boundary preservation, bottom right -Tridecimator w/ boundary preservation.
+              </div>
+            </div>
+          </div>
 
-              <p><em>Figure 6 - Chapel of Nossa with per-vertex colour (9.5Million faces) Simplified using Preprocessor using: top left -SimplFy w/o boundary preservation, top right -SimplFy w/ custom boundary preservation, bottom left -Tridecimator w/o boundary preservation, bottom right -Tridecimator w/ boundary preservation </em></p>
-
-              </div><br>
-
-            <div class="image-with-caption">
-              <img class="image-multiple-white" src="images/simplifier/bigjago/simWOboundary.png" alt="Jago without boundary pres" >
-              <img class="image-multiple-white" src="images/simplifier/bigjago/simWcustomboundary.png" alt="Jago with boundary pres">
-
-              <p><em>Figure 7 - Jago with and without the custom boundary preservation. Left -without boundary preservation , right- with custom bounding box boundary triangle preservation  </em></p>
-
-              </div><br>
+          <div class="image-panel-wrap">
+            <div class="image-panel">
+              <img class="multi-image-200" src="images/simplifier/bigjago/simWOboundary.png" alt="Jago without boundary pres">
+              <img class="multi-image-200" src="images/simplifier/bigjago/simWcustomboundary.png" alt="Jago with boundary pres">
+              <div class="image-panel-caption">
+                <strong>Figure 7:</strong> Jago with and without the custom boundary preservation. Left -without boundary preservation , right- with custom bounding box boundary triangle preservation.
+              </div>
+            </div>
+          </div>
 
 
-            <p>The revised boundary preservation successfully removes seams (Figure 4, 6), however, it produces a new problem. Small holes in the mesh seem to grow rapidly (Figure, 6 top right), a problem that especially manifests itself in large meshes (Figure 7). When meshes are composed of multiple aligned chunks, the boundaries in these chunks recede, creating massive cracks in the model.
-    
-            </p>
-
-
+          <div class="paragraph-well">
+            The revised boundary preservation successfully removes seams (Figure 4, 6), however, it produces a new problem. Small holes in the mesh seem to grow rapidly (Figure, 6 top right), a problem that especially manifests itself in large meshes (Figure 7). When meshes are composed of multiple aligned chunks, the boundaries in these chunks recede, creating massive cracks in the model.
           </div>
 
           <h3>Conclusion</h3>
-          <div class="well">
+          <div class="paragraph-well">
           <p>
           Working backwards from VCG’s source, although time consuming, allowed the simple addition of per vertex colour support and post simplification mesh cleaning. Simultaneously solving the lighting glitches and per vertex colour support.
           </p>
@@ -164,7 +180,6 @@
           </p>
           </div>
 
-          <!-- image here -->
         </div>
       </div>
     </div>
