@@ -83,7 +83,7 @@
             </p>
 
             <div class="image-with-caption">
-              <img  class="img-well-white" src="images/simplifier/seams.png" alt="Seams">
+              <img  class="img-well-white" src="images/simplifier/seams.png" alt="Seams" style="width:400px;height:230">
               <p><em>Figure 2 - Seams are formed when the edges of mesh chunks (sections) are deformed before being stitched back together</em></p>
             </div>
 
@@ -91,18 +91,47 @@
               The creation of seams can be avoided by enabling Tridecimators boundary preservation, however, this includes the boundaries surrounding any holes in a mesh. Meshes cannot be simplified beyond this boundary face count without detail compromising artefacts. 
             </p>
 
-<!--Note!: INSERT IMAGES HERE!!! !-->
+
+            <div class="image-with-caption">
+              <img class="image-multiple-white" src="images/simplifier/gede borders.png" alt="Gede with boundary triangles selected">
+              <img class="image-multiple-white" src="images/simplifier/gedeheavysimpborder.png" alt="Gede  simplified heavily with boundary preservation enabled">
+              <p><em>Figure 3 - Gede, left with all border triangles (~125 000) highlighted in red, right Gede is simplified to ~125 000 triangles with border preservation enabled</em></p>
+            </div>
+
 
             <p>
               The simplifier was adapted by enabling support for coloured vertices, post simplification mesh cleaning and a by redefining how border triangles are identified.  The pre-processor specifies a bounding box that defines the mesh volume of the mesh chunk. All triangles that intersect or exist outside of the bounding box are defined as boundary triangles. The rectangular edges of each chunk are then preserved until they are stitched together.
             </p>
 
-<!--Note!: INSERT IMAGES HERE!!! !-->
+            <div class="image-with-caption">
+              <img class="image-multiple-white" src="images/simplifier/initial-WithoutBordepres.png" alt="Gede simplified without boundary preservation" >
+              <img class="image-multiple-white" src="images/simplifier/initialWithCustomBoder.png" alt="Gede simplified with custom boundary preservation">
+              <p><em>Figure 4 - Gede simplified to 30 000 faces with an early version of the mesh pre-processor. Left is without boundary preservation, right is with custom boundary preservation</em></p>
+            </div>
 
             </div>
           <h3>Results</h3>
-          <h3>Conclusions</h3>
+          <div class="well">
+          <p>
+          Meshes were pre-processed with SimplFy and Tridecimator. These processed meshes were then visually compared to evaluate the changes made in SimplFy. The final version of the pre-processor creates a level of detail hiararchy with the root node containing the full mesh simplified down to 400 000 faces.
+          </p>
 
+          <div class="image-with-caption">
+              <img class="image-multiple-white" src="images/simplifier/jagocoloured/simWOboundary.png" alt="Gede simplified without boundary preservation" >
+              <img class="image-multiple-white" src="images/simplifier/jagocoloured/simWcustomboundary.png" alt="Gede simplified with custom boundary preservation"><br>
+              <img class="image-multiple-white" src="images/simplifier/jagocoloured/triWOboundary.png" alt="Gede simplified without boundary preservation" >
+              <img class="image-multiple-white" src="images/simplifier/jagocoloured/triWboundary.png" alt="Gede simplified with custom boundary preservation">
+
+
+              <p><em>Figure 5 - Jago with per-vertex colour (30Million faces) Simplified using Preprocessor using: top left -SimplFy w/o boundary preservation, top right -SimplFy w/ custom boundary preservation, bottom left -Tridecimator w/o boundary preservation, bottom right -Tridecimator w/ boundary preservation </em></p>
+            </div>
+          </div>
+
+          <h3>Conclusions</h3>
+          <div class="well">
+          <p>
+          </p>
+          </div>
 
           <!-- image here -->
         </div>
