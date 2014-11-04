@@ -74,3 +74,17 @@ table a:hover, p a:hover {
     -webkit-box-shadow: inset 0px 50px 50px -50px #111;
     box-shadow: inset 0px 50px 50px -50px #111;
 }
+
+/* Sticky footer */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  margin-bottom: 70px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
