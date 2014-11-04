@@ -47,6 +47,22 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
+          <h3>Overview</h3>
+          <div class="well">
+            <p>[Insert Zamani blurb here.]</p>
+            <p>
+              Our solution is based on a hierarchical level-of-detail scheme which improves rendering performance by only enhancing detail on parts of the model that are close to the viewer. This saves system resources by loading less data and rendering polygons per frame means the less strain on the GPU.
+            </p>
+            <p>
+              Our project was broken down into the following components: 
+              <ul>
+                <li>The <a href="preprocessor.html">preprocessor</a> which converts the original models into the hierarchical file format (by Benjamin Meier).</li>
+                <li>The <a href="simplifier.html">simplifier</a> which reduces the number of polygons required to represent a given mesh (by Daniel Burnham-king).</li>
+                <li>The <a href="renderer.html">renderer</a> which renders the hierarchy file output by the preprocessor and calculates the required level-of-detail (by Justin Cossutti).</li>
+              </ul>
+            </p>
+
+          </div>
           <div id="model-carousel" class="carousel slide" data-ride="carousel">
             <!-- Indicators -->
             <ol class="carousel-indicators">
