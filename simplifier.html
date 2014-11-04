@@ -49,9 +49,9 @@
       <div class="row">
         <div class="col-md-12">
           <h1>Mesh Simplifier</h1>
-          <div class="image-with-caption">
+   
           <img class="img-well-white" src="images/simplifier/overview.png" alt="Simplifier overview">
-          </div>
+  
           <h3>Introduction</h3>
           <div class="well">
             <p>
@@ -95,8 +95,8 @@
             <div class="image-with-caption">
               <img class="image-multiple-white" src="images/simplifier/gede borders.png" alt="Gede with boundary triangles selected">
               <img class="image-multiple-white" src="images/simplifier/gedeheavysimpborder.png" alt="Gede  simplified heavily with boundary preservation enabled">
-              <p><em>Figure 3 - Gede, left with all border triangles (~125 000) highlighted in red, right Gede is simplified to ~125 000 triangles with border preservation enabled</em></p>
-            </div>
+              <p><em>Figure 3 - Gede, left with all border triangles (~125 000) highlighted in red, right after simplifying Gede to ~125 000 directly with tridecimator, with border preservation enabled</em></p>
+            </div><br>
 
 
             <p>
@@ -125,11 +125,42 @@
 
               <p><em>Figure 5 - Jago with per-vertex colour (30Million faces) Simplified using Preprocessor using: top left -SimplFy w/o boundary preservation, top right -SimplFy w/ custom boundary preservation, bottom left -Tridecimator w/o boundary preservation, bottom right -Tridecimator w/ boundary preservation </em></p>
             </div>
+
+            <div class="image-with-caption">
+              <img class="image-multiple-white" src="images/simplifier/Nossa/simWOboundary.png" alt="Gede simplified without boundary preservation" >
+              <img class="image-multiple-white" src="images/simplifier/Nossa/simWcustomboundary.png" alt="Gede simplified with custom boundary preservation"><br>
+              <img class="image-multiple-white" src="images/simplifier/Nossa/triWOboundary.png" alt="Gede simplified without boundary preservation" >
+              <img class="image-multiple-white" src="images/simplifier/Nossa/triWboundary.png" alt="Gede simplified with custom boundary preservation">
+
+              <p><em>Figure 6 - Chapel of Nossa with per-vertex colour (9.5Million faces) Simplified using Preprocessor using: top left -SimplFy w/o boundary preservation, top right -SimplFy w/ custom boundary preservation, bottom left -Tridecimator w/o boundary preservation, bottom right -Tridecimator w/ boundary preservation </em></p>
+
+              </div><br>
+
+            <div class="image-with-caption">
+              <img class="image-multiple-white" src="images/simplifier/bigjago/simWOboundary.png" alt="Gede simplified without boundary preservation" >
+              <img class="image-multiple-white" src="images/simplifier/bigjago/simWcustomboundary.png" alt="Gede simplified with custom boundary preservation">
+
+              <p><em>Figure 7 - Jago with and without the custom boundary preservation. Left -without boundary preservation , right- with custom bounding box boundary triangle preservation  </em></p>
+
+              </div><br>
+
+
+            <p>The revised boundary preservation successfully removes seams (Figure 4, 6), however, it produces a new problem. Small holes in the mesh seem to grow rapidly (Figure, 6 top right), a problem that especially manifests itself in large meshes (Figure 7). When meshes are composed of multiple aligned chunks, the boundaries in these chunks recede, creating massive cracks in the model.
+    
+            </p>
+
+
           </div>
 
-          <h3>Conclusions</h3>
+          <h3>Conclusion</h3>
           <div class="well">
           <p>
+          Working backwards from VCG’s source, although time consuming, allowed the simple addition of per vertex colour support and post simplification mesh cleaning. Simultaneously solving the lighting glitches and per vertex colour support.
+          </p>
+          <p> 
+          Zamani meshes can be made up of multiple disconnected (although closely aligned) mesh ‘chunks’. The borders between these chunks recedes rapidly when processed using the modified boundary preservation in SimplFy, degrading visual quality. In general meshes looked better with seams then with the custom bounding box boundary triangle definition.</p>
+          <p>
+          Custom boundary preservation aside, Tridecimator could be adapted our mesh viewing suite, with a few minor tweaks.
           </p>
           </div>
 
