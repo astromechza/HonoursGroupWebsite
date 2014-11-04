@@ -1,6 +1,17 @@
+
 .carousel-caption{
     background: rgba(0,0,0,0.5);
     left: 0%;
     right: 0%;
     padding-top: 0;
+}
+
+.carousel-inner {
+    background: #82b8f2;
+}
+
+.carousel-inner .item img {
+    max-height: 400px;  /* <-- height of carousel here*/
+    margin-left: auto;
+    margin-right: auto;
 }
