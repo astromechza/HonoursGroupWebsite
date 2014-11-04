@@ -50,11 +50,11 @@ span.explain {
     border-bottom: 1px dotted #7A8288;
 }
 
-.image-panel-caption a {
+.image-panel-caption a, .paragraph-well a {
     color: #5BC0DE;
 }
 
-.image-panel-caption a:hover {
+.image-panel-caption a:hover, .paragraph-well a:hover {
     color: #3f99b3;
     text-decoration: none;
 }

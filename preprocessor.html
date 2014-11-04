@@ -50,10 +50,13 @@
       <div class="row">
         <div class="col-md-12">
           <h1>Level-of-Detail Preprocessor</h1>
-          <h3>Aim</h3>
+          <h3>Introduction</h3>
           <div class="paragraph-well">
-            <p>The aim of this section of the project was to build an effective Preprocessor component capable of converting a 3D model, in <a href="http://en.wikipedia.org/wiki/PLY_%28file_format%29">*.ply</a> format, into a hierarchical mesh file. After researching current Level-of-Detail techniques, we decided on using a Hierarchical Level-of-Detail (HLOD) scheme as an effective method of rendering very large meshes. The HLOD scheme represents an input mesh as a hierarchical tree of subdivided meshes in which each node represents a simplified version of all of its combined child nodes. The HLOD scheme allows detail to be gained in any region of the model by simply traversing the tree in order to reach a node which contains the required level of detail mesh for the region.</p>
-            <p>The core research goal of this section was to determine which hierarchical structures were most suitable for generating HLOD structures. We considered unbalanced structures, such as Octrees and <span class="explain" title="KD-Tree structure in which the splitting point bisects the longest axis of the bounding box.">KD-Trees</span>, as well as balanced structures such as <span class="explain" title="KD-Tree structure in which bisects a region into two sub-regions that contain equal amounts of vertices.">Variable KD-Trees</span> and Multiway KD-Trees.</p>
+            <p>
+            The aim of this section of the project was to build an effective Preprocessor component capable of converting a 3D model, in <a href="http://en.wikipedia.org/wiki/PLY_%28file_format%29">*.ply</a> format, into a hierarchical mesh file. After researching current Level-of-Detail techniques, we decided on using a Hierarchical Level-of-Detail (HLOD) scheme as an effective method of rendering very large meshes. The HLOD scheme represents an input mesh as a hierarchical tree of subdivided meshes in which each node represents a simplified version of all of its combined child nodes. The HLOD scheme allows detail to be gained in any region of the model by simply traversing the tree in order to reach a node which contains the required level of detail mesh for the region.
+            </p><p>
+            The core research goal of this section was to determine which hierarchical structures were most suitable for generating HLOD structures. We considered unbalanced structures, such as Octrees and <span class="explain" title="KD-Tree structure in which the splitting point bisects the longest axis of the bounding box.">KD-Trees</span>, as well as balanced structures such as <span class="explain" title="KD-Tree structure in which bisects a region into two sub-regions that contain equal amounts of vertices.">Variable KD-Trees</span> and Multiway KD-Trees.
+            </p>
             <p>Our specific research questions were:
               <ul>
                 <li>"Is HLOD a viable strategy when meshes are very large?"</li>
@@ -73,18 +76,22 @@
 
           <h3>Design and Implementation</h3>
           <div class="paragraph-well">
-            The Preprocessor was implemented as a multistaged pipeline (See Figure 2). The input model undergoes three major steps: cleaning, processing, and packaging; each of which perform different tasks. The cleaning step is responsible for removing any unexpected data segments and properties that can't be handled by the processor. This is necessary since the PLY model format is very flexible. This ensures that the resulting model can be processed quickly during the processing stage. The processing step is responsible for splitting, stitching, and simplifying meshes and generating the hierarchy of Level-of-Detail meshes. Finally, the packager converts the hierarchical tree into a single flat file which the Renderer can consume.
+            The Preprocessor was implemented as a multistaged pipeline (See Figure 2). The input model undergoes three major steps: cleaning, processing, and packaging; each of which perform different tasks. The cleaning step is responsible for removing any unexpected data segments and properties that can't be handled by the processor. This is necessary since the PLY model format is very flexible and also ensures that the resulting model can be processed quickly during the processing stage. The processing step is responsible for splitting, stitching, and simplifying meshes and generating the hierarchy of Level-of-Detail meshes. Finally, the packager converts the hierarchical tree into a single flat file which the <a href="renderer.html">Renderer</a> can consume.
           </div>
           <div class="image-panel-wrap">
             <div class="image-panel">
               <img src="images/preprocessor/pp_architecture.png" alt="Image showing how the preprocessor fits into the workflow">
               <div class="image-panel-caption">
-                <strong>Figure 2:</strong> A simplified view of the Preprocessor. The components coloured grey were implemented in this portion of the overall project. The Simplifier was provided by Daniel (see <a href="simplifier.html">simplifier</a>).
+                <strong>Figure 2:</strong> A simplified view of the Preprocessor. The components coloured grey were implemented in this portion of the overall project. The <a href="simplifier.html">Simplifier</a> was implemented by Daniel.
               </div>
             </div>
           </div>
           <div class="paragraph-well">
-            
+            <p>
+            Although mesh splitting, stitching, and simplification are shown as separate in Figure 2, they are performed recursively during processing: the mesh at a given node in the tree consists of a simplified version of the child nodes that have been stitched together. This is performed from the bottom up, where each leaf node is a small sub-mesh of the original mesh created during the top-down splitting operation.
+            </p><p>
+            Because one of the goals of the Preprocessor was to be able to process models that were as large as possible, the mesh splitting and stitching operations are relatively complex. Data is read from input files in a streaming fashion and as little memory is used as possible. Temporary files are used as storage where large amounts of objects need to be maintained.
+            </p>
           </div>
 
           <h3>Results</h3>
@@ -103,7 +110,10 @@
       </div>
     </div>
 
-
+    <div class="footer">
+      © Daniel Burnham-King, Justin Cossutti, Benjamin Meier | November 2014 | University of Cape Town
+    </div>
+    
     <!-- Add JS scripts and imports below this line -->
     <script src="javascripts/vendor/jquery-1.11.1.min.js"></script>
     <script src="javascripts/vendor/bootstrap.min.js"></script>
