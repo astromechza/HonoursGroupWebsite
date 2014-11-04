@@ -84,8 +84,8 @@
         </p>
 
         <div class="image-with-caption">
-          <img src="images/structural-overview.png" alt="Structural overview">
-          <p><em>Figure 1 - Structural overview of the project. The preprocessing step consists of splitting the original model, simplifying the chunks and generating the hiearchy file.</em></p>
+          <img src="images/renderer/structural-overview.png" alt="Structural overview">
+          <p><em><strong>Figure 1</strong> - Structural overview of the project. The preprocessing step consists of splitting the original model, simplifying the chunks and generating the hiearchy file.</em></p>
         </div>
 
         <br>
@@ -99,18 +99,25 @@
           <br><br>
           <strong>View-dependant refinement</strong><br>
           The primary reason for making use of an HLOD scheme is its ability to selectively refine and enhance detail of certain parts of the model only. Starting from the root node in the hierarchy, parts of the model that are closer to the viewer's camera are expanded by rendering the geometry contained in the child nodes, thus increasing the amount of detail. As the viewer's camera moves away from parts of the model, the corresponding nodes in the hierarchy are collapsed and their parent node is rendered, thereby reducing the detail rendered (and thus, the number of polygons pushed to the GPU).
-
-          <div class="image-with-caption">
-            <img src="images/node-expansion.png" alt="Node expansion process">
-            <p><em>Figure 2 - A node is expanded by projecting its bounding box onto the screen and determining its screen area metric</em></p>
-          </div>
-          <br>
+        </p>
+        <div class="image-with-caption">
+          <img src="images/renderer/node-expansion.png" alt="Node expansion process">
+          <p><em><strong>Figure 2</strong> - A node is expanded by projecting its bounding box onto the screen and determining its screen area metric</em></p>
+        </div>
+        <br>
+        <p>
           Determining when to expand or collapse a node is done using a double threshold screen area metric. The bounding box of each node is projected onto the screen in order to determine its screen area. If the bounding box is above a certain threshold, the node is deemed close to the camera and is expanded - and vice versa. Figure 2 illustrates the process of a node being expanded.
 
           <br><br>
           <strong>Data loading and caching</strong><br>
-          Reducing the amount of time the renderer spends loading data from the disk is crucial to improving performance. Data loading is performed in a parallel thread to ensure the renderer does not stutter or stall whilst waiting for IO operations to complete. To improve read speed, the geometric data for each node is located in a single, continuous block - thereby requiring only a single read call and exploiting the disk's sequential read speed.
-          <br><br>
+          Reducing the amount of time the renderer spends loading data from the disk is crucial to improving performance. Data loading is performed in a parallel thread (see Figure 3) to ensure the renderer does not stutter or stall whilst waiting for IO operations to complete. To improve read speed, the geometric data for each node is located in a single, continuous block - thereby requiring only a single read call and exploiting the disk's sequential read speed.
+        </p>
+        <div class="image-with-caption">
+          <img src="images/renderer/implementation-overview.png" alt="Implementation overview">
+          <p><em><strong>Figure 3</strong> - An overview of the renderer's implementation. A multi-threaded approach is taken for the rendering, loading and processing operations, with thread-safe queues acting as the intermediate transports.</em></p>
+        </div>
+        <br>
+        <p>
           Data that has been loaded and processed is cached in memory based on the following critera: it has been required for rendering in the last 8 seconds or it is the parent or child node of a node that was rendered in the previous frame. These conditions balance the amount of memory used by the renderer and the amount of loading the disk must perform. The parent-child condition is a form of pre-loading and reduces the number of gaps that appear in the rendered image if the required node data has not yet been loaded.
 
         </p>
@@ -118,6 +125,9 @@
 
       <h3>Results</h3>
       <div class="well">
+        The renderer exceeded the target FPS of 30 FPS for all 5 models tested. The largest model provided by the Zamani team at the time of writeing the report was the <em>Shama Fort</em> model with almost 90 million polygons. The renderer achieved a minimum of 46.8 FPS on this model, with an average FPS of 58.4. The decoupling of the loading and rendering tasks proved to be an effective method at reducing rendering pipeline stalls - at worst, gaps are briefly visible in the rendered image, but no stuttering occurs. We were provided with a 6 GB model to test with after the final report was due, and again, the renderer exceeded the target minimum frame rate. It is uncertain how the renderer will perform with even larger models, but for now it outperforms the MeshLab tool used by the Zamani team by a considerable margin, thereby proving that a hierarchical level-of-detail scheme is a viable method for rendering large meshes.
+        <br><br>
+        Final output of the renderer on the 5 tested models can be viewed on the <a href="index.html" title="Overview">Overview page</a>.
       </div>
 
     </div>
