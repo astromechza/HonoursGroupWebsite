@@ -87,6 +87,16 @@ table a:hover, p a:hover {
     box-shadow: inset 0px 50px 50px -50px #111;
 }
 
+.well a {
+    color: #5BC0DE;
+    text-decoration: underline;
+}
+
+.well a:hover {
+    color: #3f99b3;
+    text-decoration: none;
+}
+
 /* Sticky footer */
 html {
   position: relative;
