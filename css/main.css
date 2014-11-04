@@ -8,6 +8,16 @@
 
 .carousel-inner {
     background: #82b8f2;
+    border-radius: 5px;
+    border: 1px solid #fff;
+}
+
+.carousel-control.left {
+    border-radius: 5px 0px 0px 5px;
+}
+
+.carousel-control.right {
+    border-radius: 0px 5px 5px 0px;
 }
 
 .carousel-inner .item img {
@@ -15,3 +25,4 @@
     margin-left: auto;
     margin-right: auto;
 }
+
