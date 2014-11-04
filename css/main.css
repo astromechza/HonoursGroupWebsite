@@ -26,3 +26,11 @@
     margin-right: auto;
 }
 
+table a {
+    color: #5BC0DE;
+}
+
+table a:hover {
+    color: #3f99b3;
+    text-decoration: none;
+}
