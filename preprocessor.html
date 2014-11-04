@@ -73,13 +73,13 @@
 
           <h3>Design and Implementation</h3>
           <div class="paragraph-well">
-            
+            The Preprocessor was implemented as a multistaged pipeline (See Figure 2). The input model undergoes three major steps: cleaning, processing, and packaging; each of which perform different tasks. The cleaning step is responsible for removing any unexpected data segments and properties that can't be handled by the processor. This is necessary since the PLY model format is very flexible. This ensures that the resulting model can be processed quickly during the processing stage. The processing step is responsible for splitting, stitching, and simplifying meshes and generating the hierarchy of Level-of-Detail meshes. Finally, the packager converts the hierarchical tree into a single flat file which the Renderer can consume.
           </div>
           <div class="image-panel-wrap">
             <div class="image-panel">
               <img src="images/preprocessor/pp_architecture.png" alt="Image showing how the preprocessor fits into the workflow">
               <div class="image-panel-caption">
-                <strong>Figure 2:</strong> The Preprocessor produces a hierarchical mesh file from a given 3D model.
+                <strong>Figure 2:</strong> A simplified view of the Preprocessor. The components coloured grey were implemented in this portion of the overall project. The Simplifier was provided by Daniel (see <a href="simplifier.html">simplifier</a>).
               </div>
             </div>
           </div>
