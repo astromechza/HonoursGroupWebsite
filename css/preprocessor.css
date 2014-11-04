@@ -58,3 +58,15 @@ span.explain {
     color: #3f99b3;
     text-decoration: none;
 }
+
+.centered-panel-wrap {
+    width: 100%;
+    text-align: center;
+}
+
+.centered-panel-wrap .panel {
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}

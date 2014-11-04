@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Preprocessor : Software</title>
+
+    <link href="../css/vendor/slate.min.css" rel="stylesheet">
+    <link href="../css/main.css" rel="stylesheet">
+    <link href="../css/preprocessor.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="javascripts/vendor/html5shiv.min.js"></script>
+      <script src="javascripts/vendor/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container">
+
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../index.html">Visualisation of Massive Meshes</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav"> <!-- add navbar-right for right side-->
+            <li><a href="index.html">Overview</a></li>
+            <li class="active"><a href="../preprocessor.html">Preprocessor</a></li>
+            <li><a href="../simplifier.html">Simplifier</a></li>
+            <li><a href="../renderer.html">Renderer</a></li>
+            <li><a href="../downloads.html">Downloads</a></li>
+          </ul>
+        </div>
+
+      </div>
+    </nav>
+
+    <div class="container">
+
+      <div class="row">
+        <div class="col-md-12">
+          <h1>Level-of-Detail Preprocessor</h1>
+          <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation"><a href="../preprocessor.html">Research Overview</a></li>
+            <li role="presentation" class="active"><a href="../preprocessor/software.htm">Software</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <br>
+          <div class="paragraph-well">
+            The Preprocessor and its source code is available for download on this page. This page also details the recommended system requirements, and usage of the software.
+          </div>
+
+          <div class="centered-panel-wrap">
+            <div class="panel panel-default">
+              <div class="panel-heading">Recommended System</div>
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Component</th><th>Recommendation</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>CPU</td><td>Intel i5 CPU or better</td>
+                  </tr>
+                  <tr>
+                    <td>RAM</td><td>4 to 8 GB</td>
+                  </tr>
+                  <tr>
+                    <td>Storage</td><td>Due to the number of temporary files generated during preprocessing, we recommend about 5 times the size of the model in free space on the hard drive. For example, processing a 1 GB model requires around 5 GB of free space. We also recommend using a fast storage mechanism such as a 7200rpm harddrive or Solid State Drive but this is not necessary for the operation of this software.</td>
+                  </tr>      
+                  <tr>
+                    <td>Operating System</td><td>The software has been tested on both Windows 8.1 64-bit and Ubuntu 12.10 64-bit operating systems.</td>
+                  </tr>            
+                  <tr>
+                    <td>JRE</td><td>This software <strong>requires</strong> a 64-bit Java Runtime Environment of version 1.7 or later.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <h2>Downloads</h2>
+
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>File</th><th>Description</th><th>Size</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><a href="../files/binaries/PLYPreprocessor.zip">PLYPreprocessor.zip</a></td><td>Zip file containing executable JAR file and supporting resources.</td><td>3.9 MB</td>
+              </tr>
+              <tr>
+                <td><a href="../files/source/PLYPreprocessor-source.zip">PLYPreprocessor-source.zip</a></td><td>Zip file containing Java source code.</td><td>2.8 MB</td>
+              </tr>
+            </tbody>            
+          </table>
+
+          <h2>Installation</h2>
+
+          <ol>
+            <li>Download the zip file containing the executables above.</li>
+            <li>Unzip the folder into a target directory.</li>
+            <li><strong>Do not modify the folder structure or move the PLYPreprocessor.jar file.</strong></li>
+          </ol>
+
+          <h2>Usage</h2>
+
+          <ol>
+            <li>Run the PLYPreprocessor.jar file by double clicking on it.</li>
+            <li>Use the <em>Pick input file</em> button to choose the input model.</li>
+            <li>Use the <em>Pick output file</em> button to choose the output file.</li>
+            <li>If the model was recorded in a Z-up orientation, tick the <em>Swap YZ axis</em> box to convert the model into the coordinate space used by the Renderer.</li>
+            <li>Click the <em>Go</em> button to begin processing.</li>
+            <li>Watch for any errors in the console box.</li>
+          </ol>
+
+          <ul>
+            <li>All temporary files are stored in a temporary directory in the same folder as the chosen output file.</li>
+            <li>The <em>Reset</em> button can be used to clear the fields, output box, and progress bar.</li>
+            <li>The <em>Abort</em> button can be used to stop the preprocessing if it is taking too long. This may require manual removal of temporary files.</li>
+          </ul>
+
+          <h2>Screenshots</h2>
+
+          <div class="image-panel-wrap">
+            <div class="image-panel">
+              <img src="../images/preprocessor/screenshot_blank.png" alt="Image showing the main window of the Preprocessor">
+              <div class="image-panel-caption">
+                <strong>Figure 1:</strong> The main window of the Preprocessor.
+              </div>
+            </div>
+            <div class="image-panel">
+              <img src="../images/preprocessor/screenshot_running.png" alt="Image showing the main window of the Preprocessor whiel processing a model">
+              <div class="image-panel-caption">
+                <strong>Figure 2:</strong> The main window of the Preprocessor while processing a 68 MB model.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      © Daniel Burnham-King, Justin Cossutti, Benjamin Meier | November 2014 | University of Cape Town
+    </div>
+
+    <!-- Add JS scripts and imports below this line -->
+    <script src="../javascripts/vendor/jquery-1.11.1.min.js"></script>
+    <script src="../javascripts/vendor/bootstrap.min.js"></script>
+  </body>
+</html>

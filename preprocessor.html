@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Viewing Massive Meshes</title>
+    <title>Preprocessor : Overview</title>
 
     <link href="css/vendor/slate.min.css" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
@@ -50,18 +50,27 @@
       <div class="row">
         <div class="col-md-12">
           <h1>Level-of-Detail Preprocessor</h1>
+          <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="preprocessor.html">Research Overview</a></li>
+            <li role="presentation"><a href="preprocessor/software.html">Software</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
           <h3>Introduction</h3>
           <div class="paragraph-well">
             <p>
-            The aim of this section of the project was to build an effective Preprocessor component capable of converting a 3D model, in <a href="http://en.wikipedia.org/wiki/PLY_%28file_format%29">*.ply</a> format, into a hierarchical mesh file. After researching current Level-of-Detail techniques, we decided on using a Hierarchical Level-of-Detail (HLOD) scheme as an effective method of rendering very large meshes. The HLOD scheme represents an input mesh as a hierarchical tree of subdivided meshes in which each node represents a simplified version of all of its combined child nodes. The HLOD scheme allows detail to be gained in any region of the model by simply traversing the tree in order to reach a node which contains the required level of detail mesh for the region.
+            The aim of this section of the project was to build an effective Preprocessor component capable of converting a 3D model, in <a href="http://en.wikipedia.org/wiki/PLY_%28file_format%29">*.ply</a> format, into a hierarchical mesh file. After researching current Level-of-Detail (LOD) techniques, including Discrete LOD, Continuous LOD, and View-dependant LOD, we decided on using a Hierarchical Level-of-Detail (HLOD) scheme as an effective method of rendering very large meshes. The HLOD scheme represents an input mesh as a hierarchical tree of subdivided meshes in which each node represents a simplified version of all of its combined child nodes. The HLOD scheme allows detail to be gained in any region of the model by traversing the tree in order to reach a node which contains the required level of detail mesh for that region.
             </p><p>
             The core research goal of this section was to determine which hierarchical structures were most suitable for generating HLOD structures. We considered unbalanced structures, such as Octrees and <span class="explain" title="KD-Tree structure in which the splitting point bisects the longest axis of the bounding box.">KD-Trees</span>, as well as balanced structures such as <span class="explain" title="KD-Tree structure in which bisects a region into two sub-regions that contain equal amounts of vertices.">Variable KD-Trees</span> and Multiway KD-Trees.
             </p>
             <p>Our specific research questions were:
-              <ul>
+              <ol>
                 <li>"Is HLOD a viable strategy when meshes are very large?"</li>
                 <li>"Are balanced hierarchical tree structures more appropriate than unbalanced structures in the context of HLOD?"</li>
-              </ul>
+              </ol>
             </p>
           </div>
 
@@ -88,7 +97,7 @@
           </div>
           <div class="paragraph-well">
             <p>
-            Although mesh splitting, stitching, and simplification are shown as separate in Figure 2, they are performed recursively during processing: the mesh at a given node in the tree consists of a simplified version of the child nodes that have been stitched together. This is performed from the bottom up, where each leaf node is a small sub-mesh of the original mesh created during the top-down splitting operation.
+            Although mesh splitting, stitching, and simplification are shown as separate in Figure 2, they are performed recursively during processing: the mesh at a given node in the tree consists of a simplified version of the child nodes that have been stitched together. This is performed from the bottom up, where each leaf node is a small sub-mesh of the original mesh created during the top-down splitting operation. The mesh is split until sub-meshes contain fewer than 100,000 triangles and is simplified in such a way that the root node of the tree, representing the entire mesh, contains approximately 400,000 triangles. These values were determined experimentally during development.
             </p><p>
             Because one of the goals of the Preprocessor was to be able to process models that were as large as possible, the mesh splitting and stitching operations are relatively complex. Data is read from input files in a streaming fashion and as little memory is used as possible. Temporary files are used as storage where large amounts of objects need to be maintained.
             </p>
@@ -96,16 +105,26 @@
 
           <h3>Results</h3>
           <div class="paragraph-well">
-            
+            <p>
+            The experimental portion of this component involved comparing the results when different types of hierarchical structure were used as the spatial partitioning algorithm for the HLOD scheme. We compared the output files by comparing the time taken to process the models as well as the disk usage, memory usage, and variability of leaf node size in terms of number of vertices and faces. These tests were performed multiple times for each pair of data structure and test model. Our test models ranged from 3 million faces to 81 million faces.
+            </p>
+          </div>
+
+          <div class="image-panel-wrap">
+            <div class="image-panel">
+              <img src="images/preprocessor/elapsed_time_graph.png" alt="Image showing elapsed time results">
+              <div class="image-panel-caption">
+                <strong>Figure 3:</strong> Graph showing the elapsed time for 6 different test models across the 6 tested data structure. MKDTree<em>N</em> refers to a Multiway KD Tree that splits each region into N sub-regions. The Octree and KDTree are unbalanced data structures while the VKDTree and MKDTree variants are balanced trees. Note how the balanced tree structures show very similar performance results while the unbalanced trees are more skewed.
+              </div>
+            </div>
           </div>
 
           <h3>Conclusions</h3>
           <div class="paragraph-well">
-            
+            <p>
+            Our results showed that the balanced data structures were more appropriate than unbalanced data structures since they had lower variablility in the amount of geometry per leaf node. Additionally the Preprocessor was able to process models as large as 6GB (350 million faces) on our <span class="explain" title="Intel i5-650 dual core CPU, 8GB RAM, 500GB harddrive">test hardware</span> with no problems. We also identified a strong linear relationship between the number of faces in the input model and the elapsed time across all tested data structures.
+            </p>
           </div>
-
-
-          <!-- image here -->
         </div>
       </div>
     </div>
@@ -113,7 +132,7 @@
     <div class="footer">
       © Daniel Burnham-King, Justin Cossutti, Benjamin Meier | November 2014 | University of Cape Town
     </div>
-    
+
     <!-- Add JS scripts and imports below this line -->
     <script src="javascripts/vendor/jquery-1.11.1.min.js"></script>
     <script src="javascripts/vendor/bootstrap.min.js"></script>
