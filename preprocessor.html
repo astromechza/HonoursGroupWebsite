@@ -45,7 +45,29 @@
     </nav>
 
     <div class="container">
-      <h1>Hello, world!</h1>
+
+      <div class="row">
+        <div class="col-md-12">
+          <h1>Level-of-Detail Preprocessor</h1>
+          <img class="img-well-white" src="images/preprocessor/system_architecture.png" alt="Image showing how the preprocessor fits into the workflow">
+          <h3>Aim</h3>
+            <p>
+            The aim of this section of the project was to build an effective Preprocessor component capable of converting a 3D model, in <a href="http://en.wikipedia.org/wiki/PLY_%28file_format%29">*.ply</a> format, into a hierarchical mesh file. After researching current Level-of-Detail techniques, we decided on using a Hierarchical Level-of-Detail (HLOD) scheme as an effective method of rendering very large meshes. The HLOD scheme represents an input mesh as a hierarchical tree of subdivided meshes in which each node represents a simplified version of all of its combined child nodes. The HLOD scheme allows detail to be gained in any region of the model by simply traversing the tree in order to reach a node which contains the requried level of detail mesh for the region.
+            </p>
+            <p>
+            The core research goal of this section was to determine which hierarchical structures were most suitable for generating HLOD structures. We considered unbalanced structures, such as Octrees and <span title="KD-Tree structure in which the splitting point bisects the longest axis of the bounding box.">KD-Trees</span>, as well as balanced structures such as <span title="KD-Tree structure in which bisects a region into two sub-regions that contain equal amounts of vertices.">Variable KD-Trees</span> and Multiway KD-Trees.
+            <p>
+          <h3>Design and Implementation</h3>
+            <p>
+
+            </p>
+          <h3>Results</h3>
+          <h3>Conclusions</h3>
+
+
+          <!-- image here -->
+        </div>
+      </div>
     </div>
 
 
