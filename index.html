@@ -49,7 +49,13 @@
         <div class="col-md-12">
           <h3>Overview</h3>
           <div class="paragraph-well">
-            <p>[Insert Zamani blurb here.]</p>
+            <p>
+              The Zamani Project, run by the Geomatics Department at the University of Cape Town, aims to digitally capture accurate three dimensional architectural models of African heritage sites for storage in the African Cultural Heritage and Landscape Database. The project has scanned 32 different sites in 12 countries. The models are used for the preservation, education, research, and restoration of the sites. The project uses phase-based laser scanners to record range data from 300 to 800 positions around the site. Buildings are typically scanned with a 1 - 2 cm point spacing while terrain is captured at a 10 - 50 cm point spacing. The range information is used to create a dense point cloud that represents the surface or the building or terrain being scanned. 
+            </p><p>
+              The point cloud is cleaned by hand of any unwanted objects or points, such as trees, before undergoing surface reconstruction to determine a continuous surface. Surface reconstruction is the automatic conversion of a point cloud to a mesh. The final surface can be very detailed and can contain billions of triangles. The Zamani Project researchers use existing mesh processing software, such as MeshLab and ArcGIS, to navigate and interact with the resulting models, but the models often contain too many triangles to render at interactive frame rates, making manipulation diffcult. Dense point clouds can be decimated to reduce the amount of geometry and increase rendering speed however this has harmful effects on details such as crevices, engravings and other surface detail which are particularly important to researchers. 
+            </p><p>
+              This leads to the need for a more effective method for displaying the highly detailed meshes while maintaining interactive frame rates 2 . The solution will also allow the models to be displayed for tourism and educational purposes.
+            </p>
             <p>
               Our solution is based on a hierarchical level-of-detail scheme which improves rendering performance by only enhancing detail on parts of the model that are close to the viewer. This saves system resources by loading less data and rendering polygons per frame means the less strain on the GPU.
             </p>
